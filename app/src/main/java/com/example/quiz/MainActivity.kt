@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         val nameTv = findViewById<EditText>(R.id.nameTv)
 
         startBtn.setOnClickListener {
-            if (nameTv.text != null){
+            if (nameTv.text.isNotEmpty()){
                 val intent = Intent(this,QnaActivity::class.java)
                 startActivity(intent)
                 finish()
