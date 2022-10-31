@@ -59,6 +59,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/nameTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"/>
@@ -66,6 +67,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/startBtn"
                 android:text="Start"
                 android:textSize="18sp"
                 android:textColor="@color/white"
