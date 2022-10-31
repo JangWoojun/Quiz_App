@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
             else {
-                Toast.makeText(this,"Please enter your name",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"이름을 입력해주세요!",Toast.LENGTH_LONG).show()
             }
         }
     }
