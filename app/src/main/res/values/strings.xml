@@ -5,4 +5,6 @@
     <string name="please_enter_your_name">이름을 입력해주세요</string>
     <string name="name">이름</string>
     <string name="start">시작</string>
+    <string name="q">이 국기는 어느 나라 국기입니까?</string>
+    <string name="q_image">quiz image</string>
 </resources>
