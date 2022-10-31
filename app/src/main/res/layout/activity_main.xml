@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Quiz"
+        android:text="@string/quiz"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold" />
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Welcome"
+                android:text="@string/welcome"
                 android:textColor="#363A43"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16sp"
                 android:gravity="center"
-                android:text="Please enter your name"
+                android:text="@string/please_enter_your_name"
                 android:textColor="#7A8089"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -62,13 +62,14 @@
                     android:id="@+id/nameTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"/>
+                    android:hint="@string/name"/>
                 
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:textStyle="bold"
                 android:id="@+id/startBtn"
-                android:text="Start"
+                android:text="@string/start"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:background="@drawable/radius"
