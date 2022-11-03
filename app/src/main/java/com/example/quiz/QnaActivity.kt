@@ -55,13 +55,13 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
         binding.tvOptionThree.text = question.option3
         binding.tvOptionFour.text = question.option4
 
-        // 만약 mCurrentPosition가 질문 리스트 사이즈와 같아진다면 버튼 텍스트를 제출로 변경
+        // 만약 mCurrentPosition가 질문 리스트 사이즈와 같아진다면 버튼 텍스트를 마지막 제출로 변경
 
         if(mCurrentPosition == mQuestionsList!!.size){
-            binding.btnSubmit.text = "제출"
+            binding.btnSubmit.text = "마지막 제출"
         }
         else{
-            binding.btnSubmit.text = "다음"
+            binding.btnSubmit.text = "제출"
         }
 
     }
