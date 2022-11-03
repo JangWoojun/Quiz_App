@@ -6,7 +6,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import com.example.quiz.databinding.ActivityQnaBinding
 
-class QnaActivity : AppCompatActivity() {
+class QnaActivity : AppCompatActivity(),OnClickListener {
     private lateinit var binding: ActivityQnaBinding
 
     private var mCurrentPosition : Int = 1
@@ -41,6 +41,17 @@ class QnaActivity : AppCompatActivity() {
         binding.tvOptionTwo.text = question.option2
         binding.tvOptionThree.text = question.option3
         binding.tvOptionFour.text = question.option4
+
+        if(mCurrentPosition == mQuestionsList!!.size){
+            binding.btnSubmit.text = "제출"
+        }
+        else{
+            binding.btnSubmit.text = "다음"
+        }
+
+    }
+
+    override fun onClick(p0: View?) {
 
     }
 }
