@@ -14,5 +14,19 @@ class QnaActivity : AppCompatActivity() {
         binding = ActivityQnaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val questionList = Constants.getQuestion()
+        var currentPosition = 1
+        val question : Question = questionList[currentPosition-1]
+        binding.progressBar.progress = currentPosition
+        binding.progressBarText.text = "${currentPosition}/${binding.progressBar.max}"
+        binding.tvQuestion.text = question.question
+
+        binding.tvImage.setImageResource(question.image)
+
+        binding.tvOptionOne.text = question.option1
+        binding.tvOptionTwo.text = question.option2
+        binding.tvOptionThree.text = question.option3
+        binding.tvOptionFour.text = question.option4
+
     }
 }
