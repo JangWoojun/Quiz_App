@@ -1,9 +1,14 @@
 package com.example.quiz
 
+import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.example.quiz.databinding.ActivityQnaBinding
 
 class QnaActivity : AppCompatActivity(),OnClickListener {
@@ -23,8 +28,15 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
         mQuestionsList = Constants.getQuestion() // Constants에서 질문과 대답, 국기 등이 당긴 리스트 받아옴
         setQuestion()
 
+        binding.tvOptionOne.setOnClickListener(this)
+        binding.tvOptionTwo.setOnClickListener(this)
+        binding.tvOptionThree.setOnClickListener(this)
+        binding.tvOptionFour.setOnClickListener(this)
+        binding.btnSubmit.setOnClickListener(this)
+
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setQuestion() {
         val question: Question = mQuestionsList!![mCurrentPosition - 1] // questionList에서 인덱스 번호에 해당하는 것들을 담은 변수 생성
 
@@ -51,7 +63,61 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
 
     }
 
-    override fun onClick(p0: View?) {
+    private fun defaultOptionsView(){
+        val options = ArrayList<TextView>()
+        binding.tvOptionOne.let {
+            options.add(0,it)
+        }
+        binding.tvOptionTwo.let {
+            options.add(1,it)
+        }
+        binding.tvOptionThree.let {
+            options.add(2,it)
+        }
+        binding.tvOptionFour.let {
+            options.add(3,it)
+        }
 
+        for (i in options){
+            i.setTextColor(Color.parseColor("#7A8089"))
+            i.typeface = Typeface.DEFAULT
+            i.background = ContextCompat.getDrawable(
+                this,
+                R.drawable.default_option_border_bg
+            )
+        }
+    }
+
+    private fun selectedOptionView(tv:TextView,selectedOptionNum:Int){
+        defaultOptionsView()
+
+        mSelectedOptionPosition = selectedOptionNum
+
+        tv.setTextColor(Color.parseColor("#363A43"))
+        tv.setTypeface(tv.typeface,Typeface.BOLD)
+        tv.background = ContextCompat.getDrawable(
+            this,
+            R.drawable.selected_option_border_bg
+        )
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0?.id){
+            R.id.tv_option_one -> {
+                selectedOptionView(binding.tvOptionOne,1)
+            }
+            R.id.tv_option_two -> {
+                selectedOptionView(binding.tvOptionTwo,2)
+            }
+            R.id.tv_option_three -> {
+                selectedOptionView(binding.tvOptionThree,3)
+            }
+            R.id.tv_option_four -> {
+                selectedOptionView(binding.tvOptionFour,4)
+            }
+            R.id.btn_submit -> {
+                // TODO "wait"
+            }
+        }
     }
 }
