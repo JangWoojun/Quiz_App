@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/design_default_color_primary"
-            android:text="SUBMIT"
+            android:text="다음"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
