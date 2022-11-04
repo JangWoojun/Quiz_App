@@ -15,7 +15,7 @@ import com.example.quiz.databinding.ActivityQnaBinding
 class QnaActivity : AppCompatActivity(),OnClickListener {
     private lateinit var binding: ActivityQnaBinding
 
-    private val userName = intent.getStringExtra(Constants.USER_NAME)
+    private var userName : String? = null
     private var mCorrectAnswer = 0
 
     private var mCurrentPosition : Int = 1
@@ -29,7 +29,7 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
         binding = ActivityQnaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        userName = intent.getStringExtra(Constants.USER_NAME)
 
         mQuestionsList = Constants.getQuestion() // Constants에서 질문과 대답, 국기 등이 당긴 리스트 받아옴
         setQuestion()
@@ -141,8 +141,8 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
                     else ->{
                             val intent = Intent(this,ResultActivity::class.java)
                             intent.putExtra(Constants.USER_NAME,userName)
-                            intent.putExtra(Constants.CORRECT_ANSWERS,mCorrectAnswer)
-                            intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList!!.size)
+                            intent.putExtra(Constants.CORRECT_ANSWERS,mCorrectAnswer.toString())
+                            intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList!!.size.toString())
                             startActivity(intent)
                             finish()
                         }
