@@ -98,7 +98,7 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
     private fun selectedOptionView(tv:TextView,selectedOptionNum:Int){
         // 클릭 할 때마다 초기화 시키는 함수 실행
         defaultOptionsView()
-        // 정담 체크를 위해 자신이 클릭한 번호를 저장
+        // 정답 체크를 위해 자신이 클릭한 번호를 저장
         mSelectedOptionPosition = selectedOptionNum
         // 해당하는 버튼에 색을 변경
         tv.setTextColor(Color.parseColor("#363A43"))
@@ -124,12 +124,13 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
             R.id.tv_option_four -> {
                 selectedOptionView(binding.tvOptionFour,4)
             }
-            R.id.btn_submit -> {
+            // 제출 버튼을 눌렀을 때
+            R.id.btn_submit -> { // 정답과 오답을 나오게 한 뒤
                 if (mSelectedOptionPosition == 0){
-                    mCurrentPosition++
-                    when{
+                    mCurrentPosition++ // mCurrentPosition를 증가시키고
+                    when{ // 현재 위치가 mQuestionsList 사이즈보다 작거나 같다면
                         mCurrentPosition <= mQuestionsList!!.size ->{
-                            setQuestion()
+                            setQuestion() // 새 질문을 받아온다
                         }
                         else ->{
 
@@ -137,25 +138,28 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
                     }
                 }
                 else{
+                    // 해당 문제에 대해 정답을 받아온다
                     val question = mQuestionsList?.get(mCurrentPosition - 1)
                     if (question!!.chk != mSelectedOptionPosition){
+                        // 정답이 내가 선택한 값과 다르면 오답 색으로 background 변경
                         answerView(mSelectedOptionPosition,R.drawable.wrong_option_border_bg)
                     }
+                        // 그리고 해당 문제 정답을 정답 색으로 background 변경
                     answerView(question.chk,R.drawable.correct_option_border_bg)
-
+                        // 만약 현재 위치가 mQuestionsList 와 같아지면 마지막 제출로 텍스트 변경
                     if (mCurrentPosition == mQuestionsList!!.size){
                         binding.btnSubmit.text = "마지막 제출"
                     }
-                    else{
+                    else{ // 아니라면 다음 질문으로로 텍스트 변경
                         binding.btnSubmit.text = "다음 질문으로"
-                    }
+                    }   // mSelectedOptionPosition를 0으로 초기화하고
                     mSelectedOptionPosition = 0
                 }
             }
 
         }
     }
-
+    // 답변에 대한 결과에 대해 배경을 정답 혹은 오답으로 바꿔주는 함수
     private fun answerView(answer: Int, drawableView : Int){
         when(answer){
             1 -> {
