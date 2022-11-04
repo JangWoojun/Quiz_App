@@ -14,5 +14,11 @@ class ResultActivity : AppCompatActivity() {
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val totalQuestions = intent.getStringExtra(Constants.TOTAL_QUESTIONS)
+        val correctAnswers = intent.getStringExtra(Constants.CORRECT_ANSWERS)
+
+        binding.tvName.text = intent.getStringExtra(Constants.USER_NAME)
+        binding.tvResult.text = "${totalQuestions}개 문제 중 ${correctAnswers}개 문제를 맞으셨습니다"
+
     }
 }
