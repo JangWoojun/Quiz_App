@@ -39,6 +39,7 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
 
     @SuppressLint("SetTextI18n")
     private fun setQuestion() {
+        defaultOptionsView() // 질문을 가져올 때마다 초기화
         val question: Question = mQuestionsList!![mCurrentPosition - 1] // questionList에서 인덱스 번호에 해당하는 것들을 담은 변수 생성
 
         binding.progressBar.progress = mCurrentPosition // progressBar에 지점을 위치를 나타내는 변수로 지정
@@ -124,7 +125,62 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
                 selectedOptionView(binding.tvOptionFour,4)
             }
             R.id.btn_submit -> {
-                // TODO "wait"
+                if (mSelectedOptionPosition == 0){
+                    mCurrentPosition++
+                    when{
+                        mCurrentPosition <= mQuestionsList!!.size ->{
+                            setQuestion()
+                        }
+                        else ->{
+
+                        }
+                    }
+                }
+                else{
+                    val question = mQuestionsList?.get(mCurrentPosition - 1)
+                    if (question!!.chk != mSelectedOptionPosition){
+                        answerView(mSelectedOptionPosition,R.drawable.wrong_option_border_bg)
+                    }
+                    answerView(question.chk,R.drawable.correct_option_border_bg)
+
+                    if (mCurrentPosition == mQuestionsList!!.size){
+                        binding.btnSubmit.text = "마지막 제출"
+                    }
+                    else{
+                        binding.btnSubmit.text = "다음 질문으로"
+                    }
+                    mSelectedOptionPosition = 0
+                }
+            }
+
+        }
+    }
+
+    private fun answerView(answer: Int, drawableView : Int){
+        when(answer){
+            1 -> {
+                binding.tvOptionOne.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
+            }
+            2 -> {
+                binding.tvOptionTwo.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
+            }
+            3 -> {
+                binding.tvOptionThree.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
+            }
+            4 -> {
+                binding.tvOptionFour.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
             }
         }
     }
