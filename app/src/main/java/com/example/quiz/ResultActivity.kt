@@ -1,5 +1,6 @@
 package com.example.quiz
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.quiz.databinding.ActivityQnaBinding
@@ -18,7 +19,11 @@ class ResultActivity : AppCompatActivity() {
         val correctAnswers = intent.getStringExtra(Constants.CORRECT_ANSWERS)
 
         binding.tvName.text = intent.getStringExtra(Constants.USER_NAME)
-        binding.tvResult.text = "${totalQuestions}개 문제 중 ${correctAnswers}개 문제를 맞으셨습니다"
+        binding.tvScore.text = "${totalQuestions}개 문제 중 ${correctAnswers}개 문제를 맞으셨습니다"
+
+        binding.btnFinish.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java))
+        }
 
     }
 }
