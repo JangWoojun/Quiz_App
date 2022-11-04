@@ -1,6 +1,7 @@
 package com.example.quiz
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,9 @@ import com.example.quiz.databinding.ActivityQnaBinding
 class QnaActivity : AppCompatActivity(),OnClickListener {
     private lateinit var binding: ActivityQnaBinding
 
+    private val userName = intent.getStringExtra(Constants.USER_NAME)
+    private var mCorrectAnswer = 0
+
     private var mCurrentPosition : Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
     private var mSelectedOptionPosition : Int = 0
@@ -24,6 +28,8 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
 
         binding = ActivityQnaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         mQuestionsList = Constants.getQuestion() // Constants에서 질문과 대답, 국기 등이 당긴 리스트 받아옴
         setQuestion()
@@ -132,8 +138,13 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
                         mCurrentPosition <= mQuestionsList!!.size ->{
                             setQuestion() // 새 질문을 받아온다
                         }
-                        else ->{
-
+                    else ->{
+                            val intent = Intent(this,ResultActivity::class.java)
+                            intent.putExtra(Constants.USER_NAME,userName)
+                            intent.putExtra(Constants.CORRECT_ANSWERS,mCorrectAnswer)
+                            intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList!!.size)
+                            startActivity(intent)
+                            finish()
                         }
                     }
                 }
@@ -143,6 +154,9 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
                     if (question!!.chk != mSelectedOptionPosition){
                         // 정답이 내가 선택한 값과 다르면 오답 색으로 background 변경
                         answerView(mSelectedOptionPosition,R.drawable.wrong_option_border_bg)
+                    }   // 정답이 맞다면 맞은 횟수 증가
+                    else {
+                        mCorrectAnswer++
                     }
                         // 그리고 해당 문제 정답을 정답 색으로 background 변경
                     answerView(question.chk,R.drawable.correct_option_border_bg)
