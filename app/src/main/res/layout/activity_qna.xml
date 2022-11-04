@@ -43,7 +43,7 @@
             <TextView
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:text="0/9"
+                android:text="0/10"
                 android:textSize="14sp"
                 android:padding="15sp"
                 android:gravity="center"
@@ -56,7 +56,7 @@
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:progress="0"
                 android:minHeight="50sp"
-                android:max="9"
+                android:max="10"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
@@ -64,7 +64,7 @@
             <TextView
                 android:textStyle="bold"
                 android:id="@+id/progressBarText"
-                android:text="0/9"
+                android:text="0/10"
                 android:textSize="14sp"
                 android:padding="15sp"
                 android:gravity="center"
