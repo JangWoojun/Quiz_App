@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding.startBtn.setOnClickListener {
             if (binding.nameTv.text!!.isNotEmpty()){
                 val intent = Intent(this,QnaActivity::class.java)
+                intent.putExtra(Constants.USER_NAME,binding.nameTv.text.toString())
                 startActivity(intent)
                 finish()
             }
