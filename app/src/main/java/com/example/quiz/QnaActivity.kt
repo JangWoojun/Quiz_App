@@ -36,7 +36,7 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
         binding = ActivityQnaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userName = intent.getStringExtra(Constants.USER_NAME)
+        userName = intent.getStringExtra(Constants.USER_NAME) // userName에 받아온 USER_NAME을 저장
 
         mQuestionsList = Constants.getQuestion() // Constants에서 질문과 대답, 국기 등이 당긴 리스트 받아옴
         setQuestion()
@@ -54,9 +54,9 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
     private fun setQuestion() {
         defaultOptionsView() // 질문을 가져올 때마다 초기화
 
-        randomNumber = random.nextInt(questionList.size)
-        quizIndex = questionList[randomNumber]
-        questionList.removeAt(randomNumber)
+        randomNumber = random.nextInt(questionList.size) // 랜덤한 값으로 가져옴
+        quizIndex = questionList[randomNumber] // 질문을 정하는 인덱스 리스트를 랜덤한 값으로 가져옴
+        questionList.removeAt(randomNumber) // 중복을 막기 위해 가져온 값을 제거
 
         val question: Question = mQuestionsList!![quizIndex - 1] // questionList에서 인덱스 번호에 해당하는 것들을 담은 변수 생성
 
@@ -67,7 +67,7 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
 
         binding.tvImage.setImageResource(question.image) // 이미지를 question에 이미지로 지정
 
-        // 답변을 question에 답변으로 지정
+        // 답변을 question에 답변들로 지정
 
         binding.tvOptionOne.text = question.option1
         binding.tvOptionTwo.text = question.option2
@@ -150,7 +150,8 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
                         mCurrentPosition <= mQuestionsList!!.size ->{
                             setQuestion() // 새 질문을 받아온다
                         }
-                    else ->{
+                        else ->{
+                            // 질문이 끝에 도착한다면 여러 값들과 함께 ResultActivity로 이동시킴
                             val intent = Intent(this,ResultActivity::class.java)
                             intent.putExtra(Constants.USER_NAME,userName)
                             intent.putExtra(Constants.CORRECT_ANSWERS,mCorrectAnswer.toString())
