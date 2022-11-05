@@ -11,6 +11,8 @@ import android.view.View.OnClickListener
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.quiz.databinding.ActivityQnaBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 class QnaActivity : AppCompatActivity(),OnClickListener {
     private lateinit var binding: ActivityQnaBinding
@@ -18,6 +20,11 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
     private var userName : String? = null
     private var mCorrectAnswer = 0
 
+    private val random = Random()
+    private var questionList = mutableListOf(1,2,3,4,5,6,7,8,9,10)
+    private var randomNumber = random.nextInt(questionList.size)
+
+    private var quizIndex : Int = 1
     private var mCurrentPosition : Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
     private var mSelectedOptionPosition : Int = 0
@@ -46,7 +53,12 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
     @SuppressLint("SetTextI18n")
     private fun setQuestion() {
         defaultOptionsView() // 질문을 가져올 때마다 초기화
-        val question: Question = mQuestionsList!![mCurrentPosition - 1] // questionList에서 인덱스 번호에 해당하는 것들을 담은 변수 생성
+
+        randomNumber = random.nextInt(questionList.size)
+        quizIndex = questionList[randomNumber]
+        questionList.removeAt(randomNumber)
+
+        val question: Question = mQuestionsList!![quizIndex - 1] // questionList에서 인덱스 번호에 해당하는 것들을 담은 변수 생성
 
         binding.progressBar.progress = mCurrentPosition // progressBar에 지점을 위치를 나타내는 변수로 지정
         binding.progressBarText.text =
@@ -150,7 +162,7 @@ class QnaActivity : AppCompatActivity(),OnClickListener {
                 }
                 else{
                     // 해당 문제에 대해 정답을 받아온다
-                    val question = mQuestionsList?.get(mCurrentPosition - 1)
+                    val question = mQuestionsList?.get(quizIndex - 1)
                     if (question!!.chk != mSelectedOptionPosition){
                         // 정답이 내가 선택한 값과 다르면 오답 색으로 background 변경
                         answerView(mSelectedOptionPosition,R.drawable.wrong_option_border_bg)
