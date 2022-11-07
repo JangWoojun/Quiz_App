@@ -107,6 +107,37 @@ object Constants {
 
         questionsList.add(que10)
 
+        questionsList.add(que10)
+
+        val que11 = Question(
+            11, "이 국기는 어느 나라 국기입니까?",
+            R.drawable.japan162328640,
+            "japan", "Jordan",
+            "jambia", "joins", 1
+        )
+
+        questionsList.add(que11)
+
+        val que12 = Question(
+            12, "이 국기는 어느 나라 국기입니까?",
+            R.drawable.southkorea162427640,
+            "konbino", "korea",
+            "kimchiland", "kokoaina", 2
+        )
+
+        questionsList.add(que12)
+
+        val que13 = Question(
+            13, "이 국기는 어느 나라 국기입니까?",
+            R.drawable.turkishflag1774834_640,
+            "Turkey", "Tukey",
+            "Turkiye", "tokey", 3
+        )
+
+        questionsList.add(que13)
+
+
+
         return questionsList
 
     }
